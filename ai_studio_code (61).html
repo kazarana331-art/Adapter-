@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Menrels | Links</title>
+    <style>
+        :root {
+            --primary-color: #ffffff;
+            --bg-gradient: radial-gradient(circle at center, #1a1a24 0%, #050505 100%);
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1500px;
+        }
+
+        #starfield {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0;
+            animation: fadeInCanvas 3s forwards;
+        }
+
+        @keyframes fadeInCanvas { to { opacity: 1; } }
+
+        /* 3D Glass Card - Анимация влета */
+        .glass-card {
+            position: relative;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            border: 1px solid rgba(255, 255, 255, 0.0);
+            border-radius: 45px;
+            padding: 50px 30px;
+            text-align: center;
+            width: 85%;
+            max-width: 320px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0);
+            transform-style: preserve-3d;
+            will-change: transform, opacity;
+            animation: cardEntrance 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            opacity: 0;
+        }
+
+        @keyframes cardEntrance {
+            0% {
+                opacity: 0;
+                transform: translateZ(-500px) translateY(50px) rotateX(10deg);
+                backdrop-filter: blur(0px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateZ(0) translateY(0) rotateX(0deg);
+                backdrop-filter: blur(25px);
+                border-color: rgba(255, 255, 255, 0.1);
+                box-shadow: 0 40px 100px rgba(0, 0, 0, 0.7);
+            }
+        }
+
+        h1 {
+            font-weight: 200;
+            font-size: 36px;
+            text-transform: uppercase;
+            margin: 0 0 12px 0;
+            cursor: default;
+            background: linear-gradient(90deg, #ffffff, #a6afb8, #ffffff, #e2e8f0, #ffffff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transform: translateZ(60px);
+            letter-spacing: 20px;
+            animation: textReveal 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, textShine 5s linear infinite;
+        }
+
+        @keyframes textReveal {
+            0% { letter-spacing: 25px; opacity: 0; }
+            100% { letter-spacing: 6px; opacity: 1; }
+        }
+
+        @keyframes textShine { to { background-position: 200% center; } }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+            font-weight: 300;
+            line-height: 1.5;
+            margin: 0 0 35px 0;
+            letter-spacing: 0.5px;
+            transform: translateZ(40px);
+            opacity: 0;
+            animation: fadeIn 2s 1s forwards;
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transform: translateZ(30px);
+            transform-style: preserve-3d;
+        }
+
+        .btn {
+            display: block;
+            padding: 16px;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            opacity: 0;
+            transform: translateY(20px);
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Каскадное появление */
+        .btn:nth-child(1) { animation: btnAppear 0.8s 1.5s forwards; }
+        .btn:nth-child(2) { animation: btnAppear 0.8s 1.7s forwards; }
+        .btn:nth-child(3) { animation: btnAppear 0.8s 1.9s forwards; }
+        .btn:nth-child(4) { animation: btnAppear 0.8s 2.1s forwards; }
+
+        @keyframes btnAppear { to { opacity: 1; transform: translateY(0); } }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateZ(15px) translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* АНИМАЦИЯ НАЖАТИЯ: Становится чуть-чуть больше и вылетает вперед */
+        .btn:active {
+            transform: translateZ(50px) scale(1.05);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+            transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .btn-desc {
+            display: block;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 6px;
+        }
+
+        .footer-label {
+            margin-top: 35px;
+            font-size: 9px;
+            color: rgba(255, 255, 255, 0.15);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transform: translateZ(20px);
+            opacity: 0;
+            animation: fadeIn 2s 2.5s forwards;
+        }
+
+        @keyframes fadeIn { to { opacity: 1; } }
+
+    </style>
+</head>
+<body>
+
+    <canvas id="starfield"></canvas>
+
+    <div class="glass-card" id="card">
+        <h1>Menrels</h1>
+        <p class="subtitle">Мои соцсети и услуги<br>My social media and services</p>
+        
+        <div class="links-container">
+            <a href="https://t.me/Menvpn_bot" class="btn" target="_blank">
+                MEN VPN
+                <span class="btn-desc">Лучший VPN от глушилок! Bot: @Menvpn_bot</span>
+            </a>
+            <a href="https://www.instagram.com/menre1s?igsh=MWFoOTB3d3V0Yms2OQ==" class="btn" target="_blank">Instagram</a>
+            <a href="https://t.me/Menrels_squad" class="btn" target="_blank">Telegram Channel</a>
+            <a href="https://www.tiktok.com/@menre1s?_r=1&_t=ZS-96YIMC93CMM" class="btn" target="_blank">TikTok</a>
+        </div>
+
+        <div class="footer-label">Digital Presence</div>
+    </div>
+
+    <script>
+        // --- 3D TILT EFFECT ---
+        const card = document.getElementById('card');
+        let canTilt = false;
+
+        // Разрешаем наклон только после завершения анимации появления
+        setTimeout(() => { canTilt = true; }, 2000);
+
+        const tiltEffect = (e) => {
+            if (!canTilt) return;
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Замедленная физика (делим на 35 для мягкости)
+            const rotateX = (y - centerY) / 35;
+            const rotateY = (centerX - x) / 35;
+
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            card.style.transition = 'transform 0.1s ease-out';
+        };
+
+        const resetTilt = () => {
+            card.style.transition = 'transform 1.2s cubic-bezier(0.23, 1, 0.32, 1)';
+            card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        };
+
+        document.body.addEventListener('mousemove', tiltEffect);
+        document.body.addEventListener('mouseleave', resetTilt);
+
+        // --- STARS ANIMATION (HYPERDRIVE TO STABLE) ---
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let width, height, dpr;
+        let stars = [];
+        let speedMultiplier = 6; 
+
+        function resize() {
+            dpr = window.devicePixelRatio || 1;
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            ctx.scale(dpr, dpr);
+            stars = [];
+            for (let i = 0; i < 100; i++) stars.push(new Star(true));
+        }
+
+        class Star {
+            constructor(initial = false) {
+                this.reset(initial);
+            }
+            reset(initial = false) {
+                this.x = Math.random() * width;
+                this.y = initial ? Math.random() * height : -20;
+                this.size = Math.random() * 1.2 + 0.4;
+                this.baseSpeed = this.size * 0.25;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.y += this.baseSpeed * speedMultiplier;
+                this.currentOpacity = this.opacity + Math.sin(Date.now() * 0.001 + this.x) * 0.2;
+                if (this.y > height) this.reset(false);
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0.1, this.currentOpacity)})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            // Плавное замедление звезд
+            if (speedMultiplier > 1) speedMultiplier -= 0.025; 
+            stars.forEach(s => { s.update(); s.draw(); });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        animate();
+    </script>
+</body>
+</html>
