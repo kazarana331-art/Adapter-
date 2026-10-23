@@ -1,0 +1,19 @@
+# pip install uiautomator2
+import uiautomator2 as u2, random, time
+
+FRIEND = "Имя друга"  # как в списке чатов
+MESSAGES = ["Привет 🔥", "Огонёк жив", "Как дела?", "Держим серию"]
+
+d = u2.connect()
+d.app_start("com.zhiliaoapp.musically", stop=True)
+time.sleep(6)
+
+d(text="Входящие").click()   # название вкладки зависит от языка и версии
+time.sleep(2)
+d(textContains=FRIEND).click()
+time.sleep(2)
+
+field = d(className="android.widget.EditText")
+field.set_text(random.choice(MESSAGES))
+time.sleep(1)
+d.press("enter")  # если не отправилось, найдите кнопку отправки через d.dump_hierarchy()
